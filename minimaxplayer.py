@@ -28,6 +28,10 @@ class MinimaxPlayer(Player):
         bestScore = float('inf')
         for move in moves:
             board = Game(game.players[0], game.players[1], move.b)
+            if board.winner() == "O":
+                bestMove = move
+                bestScore = self.max_play(board, bestScore)
+                break
             score = self.max_play(board, bestScore)
             if score < bestScore:
                 bestMove = move
@@ -41,6 +45,10 @@ class MinimaxPlayer(Player):
         bestScore = float('-inf')
         for move in moves:
             board = Game(game.players[0], game.players[1], move.b)
+            if board.winner() == "O":
+                bestMove = move
+                bestScore = self.min_play(board, bestScore)
+                break
             score = self.min_play(board, bestScore)
             if score > bestScore:
                 bestMove = move
